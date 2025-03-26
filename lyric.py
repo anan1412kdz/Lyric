@@ -2,9 +2,9 @@ import random
 import sys
 import time
 import os
+
 line = '.'
 line1 = 'nếu lỡ một mai nay quên mat tên người'
-
 line2 = 'Tôi sẽ khắc lại những lần quên bằng nụ cười'
 line3a = 'ái cuộc đời này xem '
 line3b = 'như '
@@ -33,12 +33,12 @@ line8g = 'nắn'
 line8h = 'nót'
 line8j = 'hình'
 line8k = 'hài'
+
 def combined_effect(text, delay=0.1):
     length = len(text)
-    brightness_levels = [90, 37, 97]  # Các mức độ sáng (mờ đến đậm)
+    brightness_levels = [90, 37, 97]
 
     for i in range(length // 2 + 1):
-        # Tạo phần trái và phải của văn bản
         left_part = text[:i]
         right_part = text[length - i:]
         combined_text = left_part + " " * (length - len(left_part) - len(right_part)) + right_part
@@ -50,114 +50,72 @@ def combined_effect(text, delay=0.1):
     print(text) 
 
 def animated_fade_in_text(text, type_delay=0.05, fade_delay=0.2):
-    # Gõ từng ký tự một
     for i in range(len(text) + 1):
-        sys.stdout.write("\r" + text[:i])  # Hiển thị từng ký tự
+        sys.stdout.write("\r" + text[:i])
         sys.stdout.flush()
         time.sleep(type_delay)
     
-    # Các mức độ sáng từ mờ đến rõ
-    brightness_levels = [90, 37, 97]  # Mờ, trung bình, sáng
+    brightness_levels = [90, 37, 97]
     
     for level in brightness_levels:
-        sys.stdout.write(f"\r\033[{level}m{text}\033[0m")  # Hiển thị với độ sáng khác nhau
+        sys.stdout.write(f"\r\033[{level}m{text}\033[0m")
         sys.stdout.flush()
         time.sleep(fade_delay)
     
-    # Trả về chuỗi đã được xử lý và thêm \n để xuống dòng
     return text + "\n"
-import random
-import sys
-import time
-
-import sys
-import time
-import random
 
 def random_fill(text, delay=0.1):
-    # Tạo danh sách kết quả chứa các ký tự trắng
     result = [" "] * len(text)
-    # Tạo danh sách các chỉ số vị trí
     indices = list(range(len(text)))
 
-    # Lặp cho đến khi hoàn tất điền hết các ký tự
     while indices:
-        # Chọn một chỉ số ngẫu nhiên từ danh sách các chỉ số
         idx = random.choice(indices)
-        
-        # Điền ký tự từ chuỗi gốc vào vị trí ngẫu nhiên
         result[idx] = text[idx]
-
-        # Hiển thị chuỗi hiện tại với ký tự được điền
         sys.stdout.write("\r" + "".join(result))
         sys.stdout.flush()
-
-        # Loại bỏ vị trí đã hoàn thành
         indices.remove(idx)
-
-        # Chờ trước khi tiếp tục
         time.sleep(delay)
 
-    # Xuống dòng sau khi hoàn thành
-    print()  # Thêm dòng mới
-import sys
-import time
+    print()
 
 def fade_in_text(text, delay=0.2):
-    brightness_levels = [2, 3, 7]  # Mã ANSI: 2 - mờ, 3 - vừa, 7 - sáng
+    brightness_levels = [2, 3, 7]
 
     for level in brightness_levels:
-        sys.stdout.write(f"\033[{level}m{text}\033[0m\r")  # Hiển thị với độ sáng khác nhau
-        sys.stdout.flush()  # Làm mới bộ đệm
-        time.sleep(delay)  # Tạo độ trễ giữa các mức sáng
+        sys.stdout.write(f"\033[{level}m{text}\033[0m\r")
+        sys.stdout.flush()
+        time.sleep(delay)
 
-    print(text)  # Hiển thị chữ rõ ràng sau khi hiệu ứng kết thúc
-    sys.stdout.write(f"{text}\r\033[K")  # Hiển thị văn bản cuối cùng
+    print(text)
+    sys.stdout.write(f"{text}\r\033[K")
     sys.stdout.flush()
-    time.sleep(1)  # Giữ văn bản trong 1 giây trước khi xóa
+    time.sleep(1)
 
-    # Xóa văn bản bằng cách ghi đè lên bằng khoảng trắng
-    sys.stdout.write("\r\033[K")  # Di chuyển con trỏ về đầu dòng và xóa nội dung
+    sys.stdout.write("\r\033[K")
     sys.stdout.flush()
-
-
-import sys
-import time
 
 def mar_text(text, width=30, delay=0.1):
-    # Thêm khoảng trống hai bên để tạo hiệu ứng di chuyển
     padded_text = " " * width + text + " " * width
 
-    # Lặp qua từng vị trí trong padded_text
     for i in range(len(padded_text) - width + 1):
-        # Lấy đoạn văn bản có độ dài bằng width
         marquee_segment = padded_text[i:i + width]
-        
-        # Hiển thị đoạn văn bản
-        sys.stdout.write("\r" + marquee_segment)  # \r để di chuyển con trỏ về đầu dòng
-        sys.stdout.flush()  # Làm mới bộ đệm
-        time.sleep(delay)  # Tạo độ trễ
+        sys.stdout.write("\r" + marquee_segment)
+        sys.stdout.flush()
+        time.sleep(delay)
 
-    # Xóa dòng hiện tại và xuống dòng
-    sys.stdout.write("\r\033[K")  # \033[K để xóa nội dung của dòng
+    sys.stdout.write("\r\033[K") 
     sys.stdout.flush()
-    print()  # Xuống dòng sau khi hoàn thành
-import sys
-import time
+    print()  
 
 def fade(text, delay=0.2):
-    # Các mức độ sáng từ mờ đến đậm hơn
-    brightness_levels = [90, 37, 97]  # ANSI màu: mờ (90), trung bình (37), sáng (97)
+    brightness_levels = [90, 37, 97]
     
     for level in brightness_levels:
-        sys.stdout.write(f"\033[{level}m{text}\033[0m\r")  # Hiển thị với độ sáng khác nhau
-        sys.stdout.flush()  # Làm mới bộ đệm
-        time.sleep(delay)  # Tạo độ trễ giữa các mức sáng
-    print(text)  # Hiển thị chữ rõ ràng sau khi hiệu ứng kết thúc
+        sys.stdout.write(f"\033[{level}m{text}\033[0m\r") 
+        sys.stdout.flush()  
+        time.sleep(delay)  
+    print(text)  
 
-# Gọi hàm
-
-import os
 os.system('clear')
 
 combined_effect(f"{line1}",delay=0.13)
@@ -219,5 +177,3 @@ print(f"{line8j} ", end = '', flush = True)
 time.sleep(0.5)
 print(f"{line8k}", end = '', flush = True)
 time.sleep(0.5)
-
-
