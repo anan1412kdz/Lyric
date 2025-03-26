@@ -42,24 +42,12 @@ def combined_effect(text, delay=0.1):
         left_part = text[:i]
         right_part = text[length - i:]
         combined_text = left_part + " " * (length - len(left_part) - len(right_part)) + right_part
-
-        # Áp dụng hiệu ứng mờ dần
         for level in brightness_levels:
-            sys.stdout.write(f"\033[{level}m{combined_text}\033[0m\r")  # Hiển thị với độ sáng khác nhau
-            sys.stdout.flush()  # Làm mới bộ đệm
-            time.sleep(delay / len(brightness_levels))  # Chia độ trễ cho các mức sáng
+            sys.stdout.write(f"\033[{level}m{combined_text}\033[0m\r")  
+            sys.stdout.flush()  
+            time.sleep(delay / len(brightness_levels))  
 
-    print(text)  # Hiển thị văn bản cuối cùng rõ ràng
-
-# Gọi hàm
-
-import sys
-import time
-import sys
-import time
-
-import sys
-import time
+    print(text) 
 
 def animated_fade_in_text(text, type_delay=0.05, fade_delay=0.2):
     # Gõ từng ký tự một
